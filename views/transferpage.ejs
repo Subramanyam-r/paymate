@@ -1,0 +1,29 @@
+
+<%-include('header.ejs')-%>
+
+  <body class="text-center">
+    
+<form class="form-signin" action="/confirmation" method="post">
+  <i class="fas fa-hand-holding-usd hand-img"></i>
+  <h1 class="h3 mb-3 font-weight-normal transfer-h1">Transferring Money to <span class="paymate-blue"><b><%=beneficiary%></b></span></h1>
+
+    <div class="input-fields">
+        <select name="clientUser" type="email" id="inputEmail" class="form-control" placeholder="Select your account" required="true" autofocus="" name="cars">
+            <% for(let  i=0; i< customerDetails.length; i++) { %>
+                <option value="<%=customerDetails[i].name%>"><%=customerDetails[i].name%></option>
+            <% } %>
+          </select>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+            </div>
+        
+            <input type="number" name="amount" id="inputPassword" class="form-control" placeholder="Enter the Amount" required="true" aria-describedby="basic-addon1">
+          </div>
+    </div>
+
+  <button name="beneficiary" value="<%=beneficiary%>" type="submit" class="btn btn-lg btn-primary btn-block transfer-btn" type="submit">Transfer</button>
+</form>
+
+
+<%-include('footer.ejs')-%> 

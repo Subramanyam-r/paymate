@@ -1,0 +1,124 @@
+.logo-brand {
+    margin-bottom: 0;
+    margin-left: 40%;
+}
+
+.paymate-blue {
+    color: blue;
+}
+
+.paymate-darkblue {
+    color: #191970;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+#navbarNavDropdown {
+    position: absolute;
+    right: 5%;
+}
+
+.home-main-div {
+    background-color: rgb(252, 252, 252);
+}
+
+.welcome {
+    font-size: 3.5rem;
+}
+
+.about-paymate {
+    font-size: 1.5rem;
+}
+
+.home-left, .home-right {
+    margin: auto 0;
+    padding: 7%;
+    text-align: center;
+}
+
+.home-img {
+    width: 70%;
+}
+
+.home-button {
+    width: 7em;
+    margin-top: 5%;
+}
+
+/****************CUSTOMER PAGE CSS*****************/
+
+.cust-main {
+    padding: 4% 6%;
+}
+
+.cust-item {
+    padding: 0 10%;
+}
+
+/****************CUSTOMER PROFILE CSS**************/
+
+.cust-profile {
+    padding: 10%;
+}
+
+.cust-profile-box {
+    text-align: center;
+    padding: 5% 15%;
+}
+
+.cust-bal-div {
+    text-align: left;
+    margin: 2rem 0;
+}
+
+.cust-acc-no-div {
+    text-align: right;
+    margin: 2rem 0;
+}
+
+.cust-pay-btn {
+    font-size: 1.5rem;
+    width: 30%;
+}
+
+/**************TRANSFER PAGE CSS******************/
+
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+
+.footer-contact {
+    color: white;
+    margin: 0 1.5%;
+    font-size: 1.5rem;
+}
+
+.footer-contact:hover {
+    color: #0275d8;
+}
+
+.copyright {
+    font-size: 1rem;
+    color: rgb(180, 180, 180);
+    margin-top: 2%;
+}
+
+.jumbotron {
+    background-color: #191970;
+    text-align: center;
+}

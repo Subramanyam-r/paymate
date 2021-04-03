@@ -1,0 +1,32 @@
+<%-include('header.ejs')-%>
+
+<div class="cust-main table-responsive-sm">
+    <h1><p>Customers</p></h1>
+    <table class="table table-striped table-xl">
+        <thead>
+          <tr class="cust-row">
+            <th>Account No.</th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <% for(let i=0; i<customerList.length;i++) { %>
+                <tr>
+                <td class="cust-item"><%=customerList[i]._id%></td>
+                <td class="cust-item"><%=customerList[i].name%></td>
+                <td class="cust-item">$<%=customerList[i].balance%></td>
+                <td class="cust-item">
+                  <form action="/customers/<%=customerList[i]._id%>" method="get">
+                    <button type="submit" class="btn btn-primary">View</button></form>
+                </td>
+          </tr>
+            <% } %>
+
+        </tbody>
+      </table>
+</div>
+
+  <%-include('footer.ejs')-%>
