@@ -1,25 +1,31 @@
 
 <%-include('header.ejs')-%>
 
-<div class="container cust-profile">
-    <div class="row  border border-dark">
-        <div class="col cust-profile-box">
-            <h1 class="cust-profile-name"><%=customerDetails.name%>'s Wallet</h1>
-            <div class ="row">
-                <div class="col-sm-6 cust-bal-div">
-                    <h4 class="paymate-blue">Balance</h4>
-                    <h2><%=customerDetails.balance%></h2>
+<div class="cust-profile">
+
+            <div class="card text-white bg-primary mb-3 transfer-card">
+                <div class="card-header">PayMate Wallet</div>
+                <div class="card-body">
+                  <h2 class="card-title"><%=customerDetails.name%></h2>
+                    <div class="row">
+                        <div class="col-6 left-align">
+                            <span class="card-text">Balance</span>
+                            <h4>$<%=customerDetails.balance%></h4>
+                        </div>
+                        <div class="col-6 right-align">
+                            <span class="card-text">Account No.</span>
+                            <h4><%=customerDetails._id%></h4>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-6 cust-acc-no-div">
-                    <h4 class="paymate-blue">Account No.</h4>
-                    <h2><%=customerDetails._id%></h2>
-                </div>
+                <form action="/transfer" method="post">
+                    <div class="cust-pay-btn-div">
+                        <button name="customerName" type="submit" value="<%=customerDetails.name%>" class="btn btn-outline-light cust-pay-btn">Transfer</button>
+                    </div>
+                </form>
             </div>
-            <form action="/transfer" method="post">
-                <button name="customerName" type="submit" value="<%=customerDetails.name%>" class="btn btn-primary cust-pay-btn">Transfer</button>
-            </form>
-        </div>
+
     </div>
-</div>
+
 
 <%-include('footer.ejs')-%>

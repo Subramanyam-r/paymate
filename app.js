@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
-mongoose.connect('mongodb+srv://paymate:process.env.MONGOPASSWORD@paymate.nxpho.mongodb.net/customersDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb+srv://paymate:' + process.env.MONGOPASSWORD + '@paymate.nxpho.mongodb.net/customersDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const customerSchema = new mongoose.Schema({
     _id: Number,
     name: String,
@@ -22,7 +22,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/customers", (req, res) => {
-
     Customer.find({}, (err, docs) => {
         res.render("customerlist.ejs", {customerList: docs});
     });
@@ -42,6 +41,7 @@ app.get("/customers/:id", (req, res) => {
     });
 });
 
+
 app.post("/transfer", (req, res) => {
     let customerName = req.body.customerName;
 
@@ -50,19 +50,19 @@ app.post("/transfer", (req, res) => {
     });
 });
 
-app.post("/confirmation", (req, res) => {
+app.post("/confirmation", async (req, res) => {
     let clientUser = req.body.clientUser;
     let beneficiary = req.body.beneficiary;
     let amount = req.body.amount;
 
-    Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
+    await Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
         if(err) {
             console.log(err);
         } else {
             console.log(docs);
         }
     });
-    Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
+    await Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
         if(err) {
             console.log(err);
         } else {
@@ -70,9 +70,9 @@ app.post("/confirmation", (req, res) => {
         }
     });
     
-    res.redirect("/customers");
+    res.render("success.ejs", {});
 });
 
-app.listen(3000, () => {
+app.listen(3000 || process.env.PORT, () => {
     console.log("Server running is up!");
 });

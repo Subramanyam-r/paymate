@@ -11,13 +11,20 @@
     color: #191970;
 }
 
+.left-align {
+    text-align: left;
+}
+
+.right-align {
+    text-align: right;
+}
+
 .navbar {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
-#navbarNavDropdown {
-    position: absolute;
-    right: 5%;
+.active {
+    color: blue;
 }
 
 .home-main-div {
@@ -60,28 +67,21 @@
 /****************CUSTOMER PROFILE CSS**************/
 
 .cust-profile {
-    padding: 10%;
-}
-
-.cust-profile-box {
+    padding: 10rem 10%;
     text-align: center;
-    padding: 5% 15%;
 }
 
-.cust-bal-div {
-    text-align: left;
-    margin: 2rem 0;
-}
-
-.cust-acc-no-div {
-    text-align: right;
-    margin: 2rem 0;
+.cust-pay-btn-div {
+    font-size: 1rem;
+    margin: 2% auto 5%;
+    text-align: center;
 }
 
 .cust-pay-btn {
-    font-size: 1.5rem;
-    width: 30%;
+    width: 90%;
 }
+
+
 
 /**************TRANSFER PAGE CSS******************/
 
@@ -101,6 +101,32 @@
     }
 }
 
+.transfer-card {
+    max-width: 22rem;
+    margin: 0 auto;
+}
+
+/*************SUCCESS PAGE CSS*************/
+
+.success-main {
+    padding: 13rem 10%;
+    text-align: center;
+}
+
+.success-img, .success-h1 {
+    color: #00C09A;
+    margin: 1% 0;
+}
+
+.success-img {
+    font-size: 5rem;
+}
+
+#footer-main {
+    padding: 7%;
+    background-color: #191970;
+    text-align: center;
+}
 
 .footer-contact {
     color: white;
@@ -116,9 +142,4 @@
     font-size: 1rem;
     color: rgb(180, 180, 180);
     margin-top: 2%;
-}
-
-.jumbotron {
-    background-color: #191970;
-    text-align: center;
 }
