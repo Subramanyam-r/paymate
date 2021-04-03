@@ -1,3 +1,7 @@
+html {
+    overflow-y: overlay;
+}
+
 .logo-brand {
     margin-bottom: 0;
     margin-left: 40%;
@@ -29,6 +33,7 @@
 
 .home-main-div {
     background-color: rgb(252, 252, 252);
+    width: 100%;
 }
 
 .welcome {
@@ -67,7 +72,7 @@
 /****************CUSTOMER PROFILE CSS**************/
 
 .cust-profile {
-    padding: 10rem 10%;
+    padding: 11rem 10%;
     text-align: center;
 }
 
@@ -109,7 +114,7 @@
 /*************SUCCESS PAGE CSS*************/
 
 .success-main {
-    padding: 13rem 10%;
+    padding: 18rem 10%;
     text-align: center;
 }
 
@@ -121,6 +126,7 @@
 .success-img {
     font-size: 5rem;
 }
+ /***********FOOTER TEMPLATE CSS**************/
 
 #footer-main {
     padding: 7%;
