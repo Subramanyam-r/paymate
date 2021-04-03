@@ -41,6 +41,10 @@ app.get("/customers/:id", (req, res) => {
     });
 });
 
+app.get("/success", (req, res) => {
+    res.render("success.ejs", {});
+})
+
 
 app.post("/transfer", (req, res) => {
     let customerName = req.body.customerName;
@@ -50,19 +54,19 @@ app.post("/transfer", (req, res) => {
     });
 });
 
-app.post("/confirmation", async (req, res) => {
+app.post("/confirmation", (req, res) => {
     let clientUser = req.body.clientUser;
     let beneficiary = req.body.beneficiary;
     let amount = req.body.amount;
-
-    await Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
+    console.log(req.body);
+    Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
         if(err) {
             console.log(err);
         } else {
             console.log(docs);
         }
     });
-    await Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
+    Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
         if(err) {
             console.log(err);
         } else {
@@ -70,7 +74,7 @@ app.post("/confirmation", async (req, res) => {
         }
     });
     
-    res.render("success.ejs", {});
+    res.redirect("/success");
 });
 
 app.listen(process.env.PORT || 3000, () => {
