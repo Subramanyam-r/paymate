@@ -11,7 +11,9 @@
       <h5><p>Select Your account</p></h5>
         <select name="clientUser" type="text" class="form-control" placeholder="Select your account" required="true">
             <% for(let  i=0; i< customerDetails.length; i++) { %>
-                <option value="<%=customerDetails[i].name%>"><%=customerDetails[i].name%></option>
+                <% if(customerDetails[i].name != beneficiary) { %>
+                  <option value="<%=customerDetails[i].name%>"><b><%=customerDetails[i].name%></b> | Bal: <%=customerDetails[i].balance%></option>
+            <%  } %>
             <% } %>
           </select>
           <div class="input-group mb-3">

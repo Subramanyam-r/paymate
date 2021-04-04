@@ -43,8 +43,11 @@ app.get("/customers/:id", (req, res) => {
 
 app.get("/success", (req, res) => {
     res.render("success.ejs", {});
-})
+});
 
+app.get("/failure", (req, res) => {
+    res.render("failure.ejs", {});
+});
 
 app.post("/transfer", (req, res) => {
     let customerName = req.body.customerName;
@@ -59,22 +62,28 @@ app.post("/confirmation", (req, res) => {
     let beneficiary = req.body.beneficiary;
     let amount = req.body.amount;
     console.log(req.body);
-    Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
-        if(err) {
-            console.log(err);
+    Customer.findOne({name: clientUser}, (err, docs) => {
+        if(docs.balance > amount) {
+            Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log(docs);
+                }
+            });
+            Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log(docs);
+                }
+            });
+            
+            res.redirect("/success");
         } else {
-            console.log(docs);
+            res.redirect("/failure");
         }
     });
-    Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(docs);
-        }
-    });
-    
-    res.redirect("/success");
 });
 
 app.listen(process.env.PORT || 3000, () => {

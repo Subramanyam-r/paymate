@@ -126,6 +126,18 @@ html {
 .success-img {
     font-size: 5rem;
 }
+
+/************FAILURE PAGE CSS*****************/
+
+.failure-img, .failure-h1 {
+    color: #ff3b3b;
+    margin: 1% 0;
+}
+
+.failure-img {
+    font-size: 5rem;
+}
+
  /***********FOOTER TEMPLATE CSS**************/
 
 #footer-main {

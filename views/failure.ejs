@@ -1,0 +1,15 @@
+<%-include("header.ejs")-%>
+
+<div class="success-main">
+    <i class="fas fa-exclamation-triangle failure-img"></i>
+
+    <h1 class="failure-h1">The amount you've entered Exceeded your current balance!</h1>
+</div>
+
+<script>
+    setTimeout(function () {
+       window.location = "/customers";
+    }, 3000);
+</script>
+
+<%-include("footer.ejs")-%>
