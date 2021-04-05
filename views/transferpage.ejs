@@ -1,32 +1,70 @@
 
 <%-include('header.ejs')-%>
 
-  <body >
-    
-<form class="form-signin text-center" action="/confirmation" method="post">
-  <i class="fas fa-hand-holding-usd hand-img"></i>
-  <h1 class="h3 mb-3 font-weight-normal transfer-h1">Transferring Money to <span class="paymate-blue"><b><%=beneficiary%></b></span></h1>
+<div class="transfer-main-div">
+  <form class="" action="/confirmation" method='post'>
+    <h2>CHECKOUT</h2>
+    <hr class="mb-4">
 
-    <div class="input-fields">
-      <h5><p>Select Your account</p></h5>
-        <select name="clientUser" type="text" class="form-control" placeholder="Select your account" required="true">
-            <% for(let  i=0; i< customerDetails.length; i++) { %>
-                <% if(customerDetails[i].name != beneficiary) { %>
-                  <option value="<%=customerDetails[i].name%>"><b><%=customerDetails[i].name%></b> | Bal: <%=customerDetails[i].balance%></option>
-            <%  } %>
-            <% } %>
-          </select>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">$</span>
-            </div>
-        
-            <input type="number" name="amount" id="inputPassword" class="form-control" placeholder="Enter the Amount" required="true" aria-describedby="basic-addon1">
+    <h2 class="mb-4">Beneficiary's details</h2>
+    <div class="form-group row">
+      
+      <label for="beneficiary-name" class="col-sm-2 col-form-label">Beneficiary</label>
+      <div class="col-10 col-sm-8 col-md-6">
+        <input type="text" class="form-control" id="beneficiary-name" value="<%=beneficiaryDetails.name%>" disabled>
+      </div>
+      <i class="fas fa-lock col paymate-blue"></i>
+    </div>
+    <div class="form-group row">
+      <label for="beneficiary-bal" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-10 col-sm-8 col-md-6">
+        <div class="input-group">
+          <input type="number" class="form-control" id="beneficiary-bal" value="<%=beneficiaryDetails.balance%>" disabled>
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon1">$</span>
           </div>
+        </div>
+      </div>
+      <i class="fas fa-lock col paymate-blue"></i>
+    </div>
+    <hr class="mb-4 mt-4">
+    <h2 class="mb-4">Payee Details</h2>
+
+    <div class="form-group row">
+      <label for="beneficiary-name" class="col-sm-2 col-form-label">Account</label>
+      <div class="col-10 col-sm-8 col-md-6">
+        <select name="clientUser" type="text" class="form-control" placeholder="Select your account" required="true">
+          <% for(let  i=0; i< customerDetails.length; i++) { %>
+              <% if(customerDetails[i].name != beneficiaryDetails.name) { %>
+                <option value="<%=customerDetails[i].name%>"><b><%=customerDetails[i].name%></b> | Bal: <%=customerDetails[i].balance%></option>
+          <%  } %>
+          <% } %>
+        </select>
+      </div>
     </div>
 
-  <button name="beneficiary" value="<%=beneficiary%>" type="submit" class="btn btn-lg btn-primary btn-block transfer-btn" type="submit">Transfer</button>
+    <div class="form-group row">
+      
+        <label for="beneficiary-name" class="col-sm-2 col-form-label">Amount</label>
+        <div class="col-10 col-sm-8 col-md-6">
+          <div class="input-group">
+          <input name="amount" class="form-control" type="Number" required>
+
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon1">$</span>
+          </div>
+      </div>
+    </div>
+
+      
+
+</div>
+
+<hr class="mb-4">
+
+<button name="beneficiary" value="<%=beneficiaryDetails.name%>" type="submit" class="btn btn-primary transfer-btn col-md-10">Transfer</button>
+
 </form>
-
-
+</div>
+    
 <%-include('footer.ejs')-%> 

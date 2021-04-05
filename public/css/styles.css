@@ -109,6 +109,10 @@ html {
     width: 90%;
 }
 
+.transfer-card {
+    max-width: 22rem;
+    margin: 0 auto;
+}
 
 
 /**************TRANSFER PAGE CSS******************/
@@ -129,9 +133,18 @@ html {
     }
 }
 
-.transfer-card {
-    max-width: 22rem;
-    margin: 0 auto;
+.transfer-main-div {
+    padding: 3% 12% 5%;
+}
+
+.fa-lock {
+    font-size: 1.6rem;
+    margin: auto 0;
+    padding-left: 0;
+}
+
+.transfer-btn {
+    width: 15rem;
 }
 
 /*************SUCCESS PAGE CSS*************/

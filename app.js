@@ -52,8 +52,10 @@ app.get("/failure", (req, res) => {
 app.post("/transfer", (req, res) => {
     let customerName = req.body.customerName;
 
-    Customer.find({}, (err, docs) => {
-        res.render("transferpage.ejs", {customerDetails: docs, beneficiary: customerName});
+    Customer.find({}, (err, customerDetails) => {
+        Customer.findOne({name: customerName}, (err, beneficiaryDetails) => {
+            res.render("transferpage.ejs", {customerDetails: customerDetails, beneficiaryDetails: beneficiaryDetails});
+        });
     });
 });
 
@@ -63,7 +65,7 @@ app.post("/confirmation", (req, res) => {
     let amount = req.body.amount;
     console.log(req.body);
     Customer.findOne({name: clientUser}, (err, docs) => {
-        if(docs.balance > amount) {
+        if(docs.balance >= amount) {
             Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
                 if(err) {
                     console.log(err);
