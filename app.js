@@ -2,14 +2,23 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
+const moment = require("moment");
+
 mongoose.connect('mongodb+srv://paymate:' + process.env.MONGOPASSWORD + '@paymate.nxpho.mongodb.net/customersDB?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true});
 const customerSchema = new mongoose.Schema({
     _id: Number,
     name: String,
     balance: Number,
 });
+const transactionSchema = new mongoose.Schema({
+    client: String,
+    beneficiary: String,
+    amount: Number,
+    moment: String
+});
 
 const Customer = mongoose.model('customer', customerSchema);
+const Transaction = mongoose.model('transaction', transactionSchema);
 
 const app = express();
 
@@ -25,7 +34,6 @@ app.get("/customers", (req, res) => {
     Customer.find({}, (err, docs) => {
         res.render("customerlist.ejs", {customerList: docs});
     });
-
 });
 
 app.get("/customers/:id", (req, res) => {
@@ -47,6 +55,16 @@ app.get("/success", (req, res) => {
 
 app.get("/failure", (req, res) => {
     res.render("failure.ejs", {});
+});
+
+app.get("/transactions", (req, res) => {
+    Transaction.find({}, (err, docs) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render("transactions.ejs", {transactions: docs});
+        }
+    });
 });
 
 app.post("/transfer", (req, res) => {
@@ -80,6 +98,15 @@ app.post("/confirmation", (req, res) => {
                     console.log(docs);
                 }
             });
+
+            const newTransaction = new Transaction({
+                beneficiary: beneficiary,
+                client: clientUser,
+                amount: amount,
+                moment: moment().utcOffset("+05:30").format("DD-MM-YYYY HH:mm:ss [IST]")
+            });
+
+            newTransaction.save();
             
             res.redirect("/success");
         } else {
