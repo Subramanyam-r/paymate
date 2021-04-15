@@ -14,11 +14,11 @@
         </thead>
         <tbody>
 
-            <% for(let i=0; i<transactions.length;i++) { %>
+            <% for(let i=transactions.length-1; i>=0;i--) { %>
                 <tr>
                 <td class="cust-item"><%=transactions[i]._id%></td>
-                <td class="cust-item"><%=transactions[i].client%></td>
-                <td class="cust-item"><%=transactions[i].beneficiary%></td>
+                <td class="cust-item"><%=transactions[i].from%></td>
+                <td class="cust-item"><%=transactions[i].to%></td>
                 <td class="cust-item">$<%=transactions[i].amount%></td>
                 <td class="cust-item"><%=transactions[i].moment%></td>
           </tr>

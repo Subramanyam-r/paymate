@@ -11,8 +11,8 @@ const customerSchema = new mongoose.Schema({
     balance: Number,
 });
 const transactionSchema = new mongoose.Schema({
-    client: String,
-    beneficiary: String,
+    to: String,
+    from: String,
     amount: Number,
     moment: String
 });
@@ -82,16 +82,16 @@ app.post("/confirmation", (req, res) => {
     let beneficiary = req.body.beneficiary;
     let amount = req.body.amount;
     console.log(req.body);
-    Customer.findOne({name: clientUser}, (err, docs) => {
+    Customer.findOne({name: beneficiary}, (err, docs) => {
         if(docs.balance >= amount) {
-            Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: -amount } }, (err, docs) => {
+            Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: -amount } }, (err, docs) => {
                 if(err) {
                     console.log(err);
                 } else {
                     console.log(docs);
                 }
             });
-            Customer.findOneAndUpdate({name: beneficiary}, { $inc: { balance: amount } }, (err, docs) => {
+            Customer.findOneAndUpdate({name: clientUser}, { $inc: { balance: amount } }, (err, docs) => {
                 if(err) {
                     console.log(err);
                 } else {
@@ -100,8 +100,8 @@ app.post("/confirmation", (req, res) => {
             });
 
             const newTransaction = new Transaction({
-                beneficiary: beneficiary,
-                client: clientUser,
+                to: clientUser,
+                from: beneficiary,
                 amount: amount,
                 moment: moment().utcOffset("+05:30").format("DD-MM-YYYY HH:mm:ss [IST]")
             });
