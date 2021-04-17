@@ -39,9 +39,6 @@ app.get("/customers", (req, res) => {
 app.get("/customers/:id", (req, res) => {
     Customer.findById(req.params.id, (err, docs) => {
         if(docs) {
-            if(req.params.pay == "pay") {
-                console.log("Itz pay!");
-            }
             res.render("viewcustomer.ejs", {customerDetails: docs});
         } else {
             console.log("No docs");
